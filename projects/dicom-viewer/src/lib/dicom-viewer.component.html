@@ -8,8 +8,8 @@
                 </div>
                 <div class="text-center small">{{series.seriesDescription}}</div>
             </a>
-            <div style="text-align: center;height: 100%;align-content: flex-end;display: inline-grid;">
-                <h6 style="color:white;"><small>0.1.1</small></h6>
+            <div class="version">
+                <h6 style="color:white;"><small>0.1.2</small></h6>
 
             </div>
         </div>
@@ -76,7 +76,7 @@
                   </mat-menu> -->
                  
                     <!-- Download -->               
-                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download type="button" style="border-left: 1px dotted white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Download">
+                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Download">
                         <span class="fa fa-download"></span>
                     </a>
 

@@ -32,6 +32,13 @@
     padding: 0px;
 }
 
+.version {
+    position: absolute;
+    bottom: 20px;
+    width: 106px;
+    text-align: center;
+}
+
 a.list-group-item {
     background-color: black;
     padding: 2px;
