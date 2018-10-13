@@ -1,0 +1,24 @@
+{
+  "name": "ng-dicomviewer",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/cdk": ">=6.4.0",
+    "@angular/common": ">=4.3.0 || >6.1.0",
+    "@angular/compiler": ">=4.3.0 || >6.1.0",
+    "@angular/core": ">=4.3.0 || >6.1.0",
+    "@angular/forms": ">=4.3.0 || >6.1.9",
+    "@angular/http": ">=6.1.10",
+    "@angular/material": ">=6.4.7",
+    "@angular/platform-browser": ">=4.3.0 || >6.1.9",
+    "@angular/platform-browser-dynamic": ">=4.3.0 || >6.1.9",
+    "cornerstone-core": ">=2.2.6",
+    "cornerstone-math": ">=0.1.6",
+    "cornerstone-tools": ">=2.3.9",
+    "dicom-parser": ">=1.8.1",
+    "jquery": ">=3.2.1",
+    "rxjs": ">=6.1.0",
+    "rxjs-compat": ">=6.1.0",
+    "zone.js": ">=0.8.5"
+
+  }
+}

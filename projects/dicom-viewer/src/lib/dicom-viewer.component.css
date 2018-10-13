@@ -1,0 +1,45 @@
+.btn-default {
+    color: #ffffff;
+    background-color: #424242;
+    border-color: #424242;
+    font-size: 24pt;
+    background-image: none;
+    text-shadow: none;
+}
+
+.thumbnailSelector {
+    width:106px;
+    float:left;
+    margin-left:5px;
+    height: 100%;
+    background-color: #424242;
+}
+
+.thumbnails {
+    margin:0px;
+    margin-bottom: 0px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
+
+.csthumbnail {
+    color: white;
+    background-color:black;
+    width:100px;
+    height:100px;
+    border: 0px;
+    padding: 0px;
+}
+
+a.list-group-item {
+    background-color: black;
+    padding: 2px;
+    border: 1px solid #424242;
+    z-index: 5;
+}
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+    background-color: #424242;
+    border-color: #4e4e4e;
+    background-image: linear-gradient(red, red, red);
+}

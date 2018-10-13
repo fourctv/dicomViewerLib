@@ -1,0 +1,117 @@
+<div style="display: flex; width:100%; height: 100%;">
+    <div class="thumbnailSelector">
+        <div class="thumbnails list-group" style="height: 100%;">
+            <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item" oncontextmenu="return false" unselectable="on" onselectstart="return false;"
+                onmousedown="return false;" (click)="showSeries(i)">
+                <div thumbnail [imageData]="series.imageList[0]" class="csthumbnail" oncontextmenu="return false" unselectable="on" onselectstart="return false;"
+                    onmousedown="return false;">
+                </div>
+                <div class="text-center small">{{series.seriesDescription}}</div>
+            </a>
+        </div>
+    </div>
+
+    <!--container where image will be loaded-->
+    <div style="margin-left: 5px; overflow: hidden; width: 100%; height: 100%; background-color: #424242;">
+
+        <!-- Toolbar -->
+        <div>
+            <div class="btn-group">
+                <div class="btn-group" *ngIf="enableViewerTools">
+                    
+                    <!-- WW/WL -->
+                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Janelamento"><span class="fa fa-sun"></span></button>
+                    <!-- Invert -->
+                    <button type="button" (click)="invertImage()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Inverte"><span class="fa fa-adjust"></span></button>
+                    <!-- Zoom -->
+                    <button type="  button" (click)="enableZoom()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                    <!-- Pan -->
+                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
+                    <!-- Stack scroll -->
+                    <button type="button" (click)="enableScroll()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Navega"><span class="fa fa-bars"></span></button>
+                    <!-- Length measurement -->
+                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Tamanho"><span class="fa fa-arrows-alt-v"></span></button>
+                    <!-- Angle measurement -->
+                    <button type="button" (click)="enableAngle()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Ângulo"><span class="fa fa-angle-left"></span></button>
+                    <!-- Pixel probe -->
+                    <button type="button" (click)="enableProbe()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle"></span></button>
+                    <!-- Elliptical ROI -->
+                    <button type="button" (click)="enableElliptical()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle"></span></button>
+                    <!-- Rectangle ROI -->
+                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square"></span></button>
+                    <!-- Reset Image -->
+                    <button type="button" (click)="resetImage()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Restaura Imagem"><span class="fa fa-window-restore"></span></button>
+                </div>
+                <div class="btn-group">
+                    <!-- Play clip -->
+                    <button type="button" (click)="playClip()" style="border-left: 1px dotted white;" class="btn btn-sm btn-default"
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+                    <!-- Stop clip -->
+                    <button type="button" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+    
+                    <!-- Layout -->
+                    <!--                 <button type="button" style="border-left: 1px dotted white;" [matMenuTriggerFor]="menu" class="btn btn-sm btn-default" data-container='body' data-toggle="dropdown" aria-expanded="false" data-placement="top" title="Layout"><span class="fa fa-th-large"></span></button>
+                  <mat-menu #menu="matMenu">
+                          <a mat-menu-item class="dropdown-item" >1x1</a>
+                          <a mat-menu-item class="dropdown-item" >2x1</a>
+                          <a mat-menu-item class="dropdown-item" >1x2</a>
+                          <a mat-menu-item class="dropdown-item" >2x2</a>
+                    
+                  </mat-menu> -->
+                 
+                    <!-- Download -->               
+                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download type="button" style="border-left: 1px dotted white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Download">
+                        <span class="fa fa-download"></span>
+                    </a>
+
+                    <!-- Imagem Anterior -->
+                    <button type="button" (click)="previousImage()" [ngStyle]="hidePreviousImage" style="border-left: 1px dotted white;"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Next Image"><span class="fa fa-backward"></span></button>
+                    <!-- Próxima Imagem -->
+                    <button type="button" (click)="nextImage()" [ngStyle]="hideNextImage" class="btn btn-sm btn-default"
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Previous Image"><span class="fa fa-forward"></span></button>
+                    <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
+                        <mat-spinner style="display: inline-block;" diameter="30" strokeWidth="5" color="warn"></mat-spinner>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div style="width: 100%; height: calc(100% - 60px);position:relative;display:inline-block;color:white;"
+            oncontextmenu="return false" class='cornerstone-enabled-image' unselectable='on' onselectstart='return false;'
+            onmousedown='return false;'>
+            <div cornerstone style="width: 100%; height: 100%;top:0px;left:0px;position:absolute;outline:none;margin: 0 auto;"
+                id="dicomImage">
+            </div>
+            <div id="mrtopleft" style="position: absolute;top:3px; left:3px">
+                {{viewPort.patientName}}
+            </div>
+            <div id="mrtopright" style="position: absolute;top:3px; right:3px">
+                {{viewPort.hospital}}
+            </div>
+            <div id="mrbottomright" style="position: absolute;bottom:6px; right:3px">
+                <div id="zoomText">Zoom: {{viewPort.zoomValue}}</div>
+                <div id="sliceText">Image: {{viewPort.currentIndex+1}}/{{imageCount}}</div>
+            </div>
+            <div id="mrbottomleft" style="position: absolute;bottom:3px; left:3px">
+                WW/WC: {{viewPort.windowingValue}}
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -25,7 +25,13 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/cornerstone-core/dist/cornerstone.js",
+              "node_modules/cornerstone-math/dist/cornerstoneMath.js",
+              "node_modules/cornerstone-tools/dist/cornerstoneTools.js",
+              "node_modules/dicom-parser/dist/dicomParser.js",
+              "src/assets/cornerstone/lib/cornerstoneWADOImageLoader.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -115,6 +121,45 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dicomViewer": {
+      "root": "projects/dicom-viewer",
+      "sourceRoot": "projects/dicom-viewer/src",
+      "projectType": "library",
+      "prefix": "dicom",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/dicom-viewer/tsconfig.lib.json",
+            "project": "projects/dicom-viewer/ng-package.json"
+          },
+          "configurations": {
+            "production": {}
+          }
+
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dicom-viewer/src/test.ts",
+            "tsConfig": "projects/dicom-viewer/tsconfig.spec.json",
+            "karmaConfig": "projects/dicom-viewer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dicom-viewer/tsconfig.lib.json",
+              "projects/dicom-viewer/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
