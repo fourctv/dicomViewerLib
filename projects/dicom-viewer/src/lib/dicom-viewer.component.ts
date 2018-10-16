@@ -15,7 +15,7 @@ export class DICOMViewerComponent implements AfterViewInit {
 
     @Input()public enableViewerTools = false; // enable viewer tools
     @Input()public downloadImagesURL = '' // download images URL
-
+    @Input()public maxImagesToLoad = 20; // limit for the automatic loading of study images
 
     public seriesList = []; // list of series on the images being displayed
     public currentSeriesIndex = 0;
@@ -26,12 +26,22 @@ export class DICOMViewerComponent implements AfterViewInit {
     public get hidePreviousImage(): any { return { color: (this.viewPort.currentIndex < 1) ? 'black' : 'white' }; }
     public get hideNextImage(): any { return { color: (this.viewPort.currentIndex >= (this.imageCount - 1)) ? 'black' : 'white' }; }
 
+    // control message for more images to load
+    public get moreImagestoLoad():string {
+        if (this.loadedImages.length < this.imageIdList.length && !this.loadingImages) { // are there any more images to load?
+            const imagesToLoad = (this.maxImagesToLoad <= 0)?(this.imageIdList.length - this.loadedImages.length):Math.min(this.maxImagesToLoad,this.imageIdList.length - this.loadedImages.length);
+            return 'load next '+imagesToLoad+' images';
+        } else return '';
+    }
+
     // control exhibition of a loading images progress indicator
     public loadingImages = false;
     public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
 
     @ViewChild(CornerstoneDirective) viewPort: CornerstoneDirective; // the main cornertone view port
     
+    private loadedImages = [];
+    private imageIdList = [];
     private element:any;
 
     constructor() {}
@@ -43,19 +53,53 @@ export class DICOMViewerComponent implements AfterViewInit {
     /**
      * Load dicom images for display
      * 
-     * @param imageList list of imageIs to load and display
+     * @param imageIdList list of imageIds to load and display
      */
-    loadStudyImages(imageList: Array<any>) {
+    loadStudyImages(imageIdList: Array<any>) {
+        this.imageIdList = imageIdList;
         this.viewPort.resetImageCache(); // clean up image cache
-        this.loadingImages = true; // activate progress indicator
         this.seriesList = []; // start a new series list
+        this.currentSeriesIndex = 0; // always display first series
+        this.loadedImages = []; // reset list of images already loaded
+        
+        //
+        // loop thru all imageIds, load and cache them for exhibition (up the the maximum limit defined)
+        //
+        const maxImages = (this.maxImagesToLoad <= 0)?imageIdList.length:Math.min(this.maxImagesToLoad,imageIdList.length);
+        this.loadingImages = true; // activate progress indicator
+        for (let index = 0; index < maxImages; index++) {
+            const imageId = imageIdList[index];
+            cornerstone.loadAndCacheImage(imageId).then(imageData => {this.imageLoaded(imageData, index, maxImages)});  
+        }
 
+    }
+
+    /**
+     * Load the next batch of images
+     */
+    public loadMoreImages() {
         //
-        // loop thru all imageIds, load and cache them for exhibition
+        // loop thru all imageIds, load and cache them for exhibition (up the the maximum limit defined)
         //
-        imageList.forEach((imageId, imageIndex) => {
-            cornerstone.loadAndCacheImage(imageId).then(imageData => {
-                // build list of series in all loadded images
+        const maxImages = (this.maxImagesToLoad <= 0)?(this.imageIdList.length - this.loadedImages.length):Math.min(this.maxImagesToLoad,this.imageIdList.length - this.loadedImages.length);
+        this.loadingImages = true; // activate progress indicator
+        let nextImageIndex = this.loadedImages.length;
+        for (let index = 0; index < maxImages; index++) {
+            const imageId = this.imageIdList[nextImageIndex++];
+            cornerstone.loadAndCacheImage(imageId).then(imageData => {this.imageLoaded(imageData, index, maxImages)});  
+        }
+
+    }
+
+    /**
+     * 
+     * @param imageData the dicom image data
+     * @param imageIndex the image index loades
+     * @param maxImages max images to load
+     */
+    private imageLoaded(imageData, imageIndex, maxImages) {
+        console.log(imageData.imageId)
+               // build list of series in all loadded images
                 const series = {
                     studyID: imageData.data.string('x0020000d'),
                     seriesID: imageData.data.string('x0020000d'),
@@ -75,20 +119,18 @@ export class DICOMViewerComponent implements AfterViewInit {
                     seriesItem.imageCount++;
                     seriesItem.imageList.push(imageData);
                 }
-
-                if (seriesIndex === 0) {
-                    this.currentSeriesIndex = seriesIndex;
+    
+                if (seriesIndex === this.currentSeriesIndex) {
                     this.currentSeries = this.seriesList[seriesIndex];
                     this.imageCount = this.currentSeries.imageCount; // get total image count
                     this.viewPort.addImageData(imageData);
                 }
 
-                if ((imageIndex+1) >= imageList.length) { // did we finish loading images?
+                this.loadedImages.push(imageData); // save to images loaded
+    
+                if ((imageIndex+1) >= maxImages) { // did we finish loading images?
                     this.loadingImages = false; // deactivate progress indicator
                 }
-            })
-
-        });
 
     }
 

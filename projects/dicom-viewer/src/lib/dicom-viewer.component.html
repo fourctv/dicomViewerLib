@@ -9,7 +9,7 @@
                 <div class="text-center small">{{series.seriesDescription}}</div>
             </a>
             <div class="version">
-                <h6 style="color:white;"><small>0.1.2</small></h6>
+                <h6 style="color:white;"><small>0.1.4</small></h6>
 
             </div>
         </div>
@@ -87,6 +87,13 @@
                     <!-- Próxima Imagem -->
                     <button type="button" (click)="nextImage()" [ngStyle]="hideNextImage" class="btn btn-sm btn-default"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Previous Image"><span class="fa fa-forward"></span></button>
+                 
+                    <!-- Load Next Batch -->               
+                    <a *ngIf="moreImagestoLoad != ''" (click)="loadMoreImages()"  style="border-left: 1px dotted white;color: white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Load more images...">
+                        {{moreImagestoLoad}}
+                    </a>
+
+                    <!-- Progress Spinner -->               
                     <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
                         <mat-spinner style="display: inline-block;" diameter="30" strokeWidth="5" color="warn"></mat-spinner>
                     </div>
@@ -107,12 +114,15 @@
             <div id="mrtopright" style="position: absolute;top:3px; right:3px">
                 {{viewPort.hospital}}
             </div>
-            <div id="mrbottomright" style="position: absolute;bottom:6px; right:3px">
-                <div id="zoomText">Zoom: {{viewPort.zoomValue}}</div>
-                <div id="sliceText">Image: {{viewPort.currentIndex+1}}/{{imageCount}}</div>
-            </div>
             <div id="mrbottomleft" style="position: absolute;bottom:3px; left:3px">
                 WW/WC: {{viewPort.windowingValue}}
+            </div>
+            <div id="mrbottomcenter" style="position: absolute;bottom:3px; width: 100%;text-align: center; color:red">
+                SOMENTE PARA VISUALIZAÇÃO, NÃO PODE SER USADO PARA DIAGNÓSTICO.
+            </div>
+            <div id="mrbottomright" style="position: absolute;bottom:6px; right:3px">
+                <div id="zoomText">Zoom: {{viewPort.zoomValue}}</div>
+                <div id="sliceText">Image: {{(imageCount > 0)?viewPort.currentIndex+1:0}}/{{imageCount}}</div>
             </div>
         </div>
 

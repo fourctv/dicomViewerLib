@@ -18,6 +18,7 @@ export class CornerstoneDirective implements OnInit {
   public imageList = [];
   private imageIdList = [];
   public currentIndex = 0;
+  public currentImage:any;
   public patientName = ''; // current image Patient name, do display on the overlay
   public hospital = ''; // current image Institution name, to display on the overlay
 
@@ -84,6 +85,7 @@ export class CornerstoneDirective implements OnInit {
     //cornerstone.reset(this.element);
     this.imageList = [];
     this.imageIdList = [];
+    this.currentImage = null;
   }
 
   public previousImage() {
@@ -119,6 +121,7 @@ export class CornerstoneDirective implements OnInit {
   public displayImage(image) {
     const viewport = cornerstone.getDefaultViewportForImage(this.element, image);
     cornerstone.displayImage(this.element, image, viewport);
+    this.currentImage = image;
     // Fit the image to the viewport window
     cornerstone.fitToWindow(this.element);
     cornerstone.resize(this.element, true);
