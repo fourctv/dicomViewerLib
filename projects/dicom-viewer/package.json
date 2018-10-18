@@ -1,6 +1,6 @@
 {
   "name": "ng-dicomviewer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Angular DICOM Viewer Component based on Cornerstore",
   "repository": {
     "type": "git",
@@ -11,6 +11,7 @@
   "bugs": {
     "url": "https://github.com/fourctv/dicomViewerLib/issues"
   },
+  "homepage": "https://github.com/fourctv/dicomViewerLib#readme",
   "peerDependencies": {
     "@angular/cdk": ">=6.4.0",
     "@angular/common": ">=4.3.0 || >6.1.0",
