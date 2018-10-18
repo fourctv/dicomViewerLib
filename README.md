@@ -13,9 +13,9 @@ npm install ng-dicomviewer --save
 
 ### Add `cornerstonejs` dependencies
 
-This component depends on `conerstonejs`, so you need to also install `cornerstone` modules into your project:
+This component depends on `cornerstonejs`, so you need to also install `cornerstone` and `cornerstoneTools` modules into your project:
 ```
-npm install cornerstone-core cornerstone-math cornerstone-tools dicom-parser --save
+npm install cornerstone-core cornerstone-math dicom-parser cornerstone-tools --save
 ```
 
 ## Usage
@@ -35,6 +35,22 @@ import { DicomViewerModule } from 'ng-dicomviewer';
     ]
     ...
 ```
+
+### Add Cornerstone modules to your build
+
+You need to manually force `cornerstone` libraries to be included into your build. For that you need to edit you `angular.json` file and add the following to the `architect.build.options.scripts`:
+```
+            "scripts": [
+              "node_modules/cornerstone-core/dist/cornerstone.js",
+              "node_modules/cornerstone-math/dist/cornerstoneMath.js",
+              "node_modules/cornerstone-tools/dist/cornerstoneTools.js",
+              "node_modules/dicom-parser/dist/dicomParser.js",
+              "src/assets/cornerstone/lib/cornerstoneWADOImageLoader.js"
+      
+            ]
+```
+
+(see example [here](https://github.com/fourctv/dicomViewerLib/blob/master/angular.json))
 
 ### Add component to your page
 
