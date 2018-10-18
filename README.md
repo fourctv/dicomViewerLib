@@ -5,7 +5,7 @@
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Dependency Status](https://david-dm.org/fourctv/dicomViewerLib.svg)](https://david-dm.org/fourctv/dicomViewerLib)
 [![devDependency Status](https://david-dm.org/fourctv/dicomViewerLib/dev-status.svg)](https://david-dm.org/fourctv/dicomViewerLib#info=devDependencies)
-[![npm version](https://badge.fury.io/js/dicomViewerLib.svg)](https://badge.fury.io/js/ng-dicomViewerLib)
+[![npm version](https://badge.fury.io/js/dicomViewerLib.svg)](https://badge.fury.io/js/ng-dicomviewer)
 
 This is an Angular 6+ DICOM Web Viewer Component, based on [CornerstoneJS](https://github.com/cornerstonejs) Project.
 
