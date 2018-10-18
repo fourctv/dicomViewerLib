@@ -36,3 +36,31 @@ import { DicomViewerModule } from 'ng-dicomviewer';
     ...
 ```
 
+### Add component to your page
+
+```
+  <div style="height: 100%; width:100%;">
+    <dicom-viewer [enableViewerTools]="true" style="height:100%; width:100%; margin: 10px;"></dicom-viewer>
+  </div>
+```
+
+## API
+
+The component includes some input properties and a method to load/show dicom images.
+
+### Input properties
+
+- enableViewerTools: a boolean `true|false` to indicate of viewer tools should be enabled or not. Tools include Langth, Angle, Elliptical ROI, etc...
+- maxImagesToLoad: maximum number of images to load for display (default: 20). If more images are set for display, they will be loaded `maxImagesToLoad` at a time. If value is set to `0` or `-1`, no image loading limit will apply.
+- downloadImagesURL: optional property, if set a **Download Images** button will be enabled. The URI value set will be used to download all images as a `.zip` file.
+
+### DICOM Images to Display
+
+In order to display a Study/Series one has to call the component's `loadStudyImages` method, passing an array of **Image Ids**. Those **Image Ids** will then be used to load images for display. Image loading uses `cornerstone` [Image Loaders](https://github.com/cornerstonejs/cornerstone/wiki/ImageLoader), so **[Image Ids](https://github.com/cornerstonejs/cornerstone/wiki/ImageIds)** must follow `cornerstone` [requirements](https://github.com/cornerstonejs/cornerstone/wiki/ImageIds).
+
+## Example
+
+This project includes a demo application that allows one to select DICOM files for display. It can be found [here](https://github.com/fourctv/dicomViewerLib/blob/master/src/app/app.component.ts).
+
+The example uses [Cornerstone WADO Image Loader](https://github.com/cornerstonejs/cornerstoneWADOImageLoader).
+
