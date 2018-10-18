@@ -1,27 +1,38 @@
-# DicomViewerDemo
+# Dicom Viewer Component
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
+This is an Angular 6+ DICOM Web Viewer Component, based on [CornerstoneJS](https://github.com/cornerstonejs) Project.
 
-## Development server
+It includes a demo app that can be tried [here](https://fourctv.github.io/dicomViewerDemo/). Demo app source is included in the project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+Install via [NPM](https://www.npmjs.com):
+```
+npm install ng-dicomviewer --save
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Add `cornerstonejs` dependencies
 
-## Build
+This component depends on `conerstonejs`, so you need to also install `cornerstone` modules into your project:
+```
+npm install cornerstone-core cornerstone-math cornerstone-tools dicom-parser --save
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Usage
 
-## Running unit tests
+### Import **DICOMViewerModule**.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You need to import `DICOMViewerModule` into your `app.module.ts`, and include it into your imports:
+```
+...
+import { DicomViewerModule } from 'ng-dicomviewer';
+...
+@NgModule({
+    imports: [
+...
+       DicomViewerModule
+...
+    ]
+    ...
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
