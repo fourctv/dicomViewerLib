@@ -1,7 +1,6 @@
 # Dicom Viewer Component
 
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Build Status](https://travis-ci.org/fourctv/dicomViewerLib.svg?branch=master)](https://travis-ci.org/fourctv/dicomViewerLib)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Dependency Status](https://david-dm.org/fourctv/dicomViewerLib.svg)](https://david-dm.org/fourctv/dicomViewerLib)
 [![devDependency Status](https://david-dm.org/fourctv/dicomViewerLib/dev-status.svg)](https://david-dm.org/fourctv/dicomViewerLib#info=devDependencies)
