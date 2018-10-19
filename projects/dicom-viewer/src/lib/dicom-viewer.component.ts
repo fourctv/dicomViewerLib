@@ -13,13 +13,13 @@ declare const cornerstoneTools;
 })
 export class DICOMViewerComponent implements AfterViewInit {
 
-    @Input()public enableViewerTools = false; // enable viewer tools
-    @Input()public downloadImagesURL = '' // download images URL
-    @Input()public maxImagesToLoad = 20; // limit for the automatic loading of study images
+    @Input() public enableViewerTools = false; // enable viewer tools
+    @Input() public downloadImagesURL = '' // download images URL
+    @Input() public maxImagesToLoad = 20; // limit for the automatic loading of study images
 
     public seriesList = []; // list of series on the images being displayed
     public currentSeriesIndex = 0;
-    public currentSeries:any = {};
+    public currentSeries: any = {};
     public imageCount = 0; // total image count being viewed
 
     // control enable/disable image scroll buttons
@@ -27,10 +27,10 @@ export class DICOMViewerComponent implements AfterViewInit {
     public get hideNextImage(): any { return { color: (this.viewPort.currentIndex >= (this.imageCount - 1)) ? 'black' : 'white' }; }
 
     // control message for more images to load
-    public get moreImagestoLoad():string {
+    public get moreImagestoLoad(): string {
         if (this.loadedImages.length < this.imageIdList.length && !this.loadingImages) { // are there any more images to load?
-            const imagesToLoad = (this.maxImagesToLoad <= 0)?(this.imageIdList.length - this.loadedImages.length):Math.min(this.maxImagesToLoad,this.imageIdList.length - this.loadedImages.length);
-            return 'load next '+imagesToLoad+' images';
+            const imagesToLoad = (this.maxImagesToLoad <= 0) ? (this.imageIdList.length - this.loadedImages.length) : Math.min(this.maxImagesToLoad, this.imageIdList.length - this.loadedImages.length);
+            return 'load next ' + imagesToLoad + ' images';
         } else return '';
     }
 
@@ -39,12 +39,12 @@ export class DICOMViewerComponent implements AfterViewInit {
     public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
 
     @ViewChild(CornerstoneDirective) viewPort: CornerstoneDirective; // the main cornertone view port
-    
+
     private loadedImages = [];
     private imageIdList = [];
-    private element:any;
+    private element: any;
 
-    constructor() {}
+    constructor() { }
 
     ngAfterViewInit() {
         this.element = this.viewPort.element;
@@ -61,15 +61,15 @@ export class DICOMViewerComponent implements AfterViewInit {
         this.seriesList = []; // start a new series list
         this.currentSeriesIndex = 0; // always display first series
         this.loadedImages = []; // reset list of images already loaded
-        
+
         //
         // loop thru all imageIds, load and cache them for exhibition (up the the maximum limit defined)
         //
-        const maxImages = (this.maxImagesToLoad <= 0)?imageIdList.length:Math.min(this.maxImagesToLoad,imageIdList.length);
+        const maxImages = (this.maxImagesToLoad <= 0) ? imageIdList.length : Math.min(this.maxImagesToLoad, imageIdList.length);
         this.loadingImages = true; // activate progress indicator
         for (let index = 0; index < maxImages; index++) {
             const imageId = imageIdList[index];
-            cornerstone.loadAndCacheImage(imageId).then(imageData => {this.imageLoaded(imageData, index, maxImages)});  
+            cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData, index, maxImages) });
         }
 
     }
@@ -81,12 +81,12 @@ export class DICOMViewerComponent implements AfterViewInit {
         //
         // loop thru all imageIds, load and cache them for exhibition (up the the maximum limit defined)
         //
-        const maxImages = (this.maxImagesToLoad <= 0)?(this.imageIdList.length - this.loadedImages.length):Math.min(this.maxImagesToLoad,this.imageIdList.length - this.loadedImages.length);
+        const maxImages = (this.maxImagesToLoad <= 0) ? (this.imageIdList.length - this.loadedImages.length) : Math.min(this.maxImagesToLoad, this.imageIdList.length - this.loadedImages.length);
         this.loadingImages = true; // activate progress indicator
         let nextImageIndex = this.loadedImages.length;
         for (let index = 0; index < maxImages; index++) {
             const imageId = this.imageIdList[nextImageIndex++];
-            cornerstone.loadAndCacheImage(imageId).then(imageData => {this.imageLoaded(imageData, index, maxImages)});  
+            cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData, index, maxImages) });
         }
 
     }
@@ -98,40 +98,46 @@ export class DICOMViewerComponent implements AfterViewInit {
      * @param maxImages max images to load
      */
     private imageLoaded(imageData, imageIndex, maxImages) {
-        console.log(imageData.imageId)
-               // build list of series in all loadded images
-                const series = {
-                    studyID: imageData.data.string('x0020000d'),
-                    seriesID: imageData.data.string('x0020000d'),
-                    seriesNumber: imageData.data.intString('x00200011'),
-                    studyDescription: imageData.data.string('x00081030'),
-                    seriesDescription: imageData.data.string('x0008103e'),
-                    imageCount: 1,
-                    imageList: [imageData]
-                }
-                // if this is a new series, add it to the list
-                let seriesIndex = this.seriesList.findIndex(item => item.seriesID === series.seriesID);
-                if (seriesIndex < 0) {
-                    seriesIndex = this.seriesList.length;
-                    this.seriesList.push(series);
-                } else {
-                    let seriesItem = this.seriesList[seriesIndex];
-                    seriesItem.imageCount++;
-                    seriesItem.imageList.push(imageData);
-                }
-    
-                if (seriesIndex === this.currentSeriesIndex) {
-                    this.currentSeries = this.seriesList[seriesIndex];
-                    this.imageCount = this.currentSeries.imageCount; // get total image count
-                    this.viewPort.addImageData(imageData);
-                }
+        //console.log(imageData.imageId)
+        // build list of series in all loadded images
+        const series = {
+            studyID: imageData.data.string('x0020000d'),
+            seriesID: imageData.data.string('x0020000e'),
+            seriesNumber: imageData.data.intString('x00200011'),
+            studyDescription: imageData.data.string('x00081030'),
+            seriesDescription: imageData.data.string('x0008103e'),
+            imageCount: 1,
+            imageList: [imageData]
+        }
+        // if this is a new series, add it to the list
+        let seriesIndex = this.seriesList.findIndex(item => item.seriesID === series.seriesID);
+        if (seriesIndex < 0) {
+            seriesIndex = this.seriesList.length;
+            this.seriesList.push(series);
+        } else {
+            let seriesItem = this.seriesList[seriesIndex];
+            seriesItem.imageCount++;
+            seriesItem.imageList.push(imageData);
+            seriesItem.imageList.sort((a,b) => {
+                if (a.data.intString('x00200013') > b.data.intString('x00200013')) return 1;
+                if (a.data.intString('x00200013') < b.data.intString('x00200013')) return -1;
+                return 0;
+            })
+        }
+        
+        this.loadedImages.push(imageData); // save to images loaded
+        
+        if ((imageIndex + 1) >= maxImages) { // did we finish loading images?
+            this.loadingImages = false; // deactivate progress indicator
+        }
 
-                this.loadedImages.push(imageData); // save to images loaded
-    
-                if ((imageIndex+1) >= maxImages) { // did we finish loading images?
-                    this.loadingImages = false; // deactivate progress indicator
-                }
-
+        if (seriesIndex === this.currentSeriesIndex) {
+            //this.currentSeries = this.seriesList[seriesIndex];
+            //this.imageCount = this.currentSeries.imageCount; // get total image count
+            //this.viewPort.addImageData(imageData);
+            this.showSeries(this.currentSeriesIndex)
+        }
+        
     }
 
     public showSeries(index) {
@@ -146,11 +152,11 @@ export class DICOMViewerComponent implements AfterViewInit {
             this.viewPort.addImageData(imageData);
         }
         this.loadingImages = false; // de-activate progress indicator
-   }
+    }
 
-   public saveAs() {
-    cornerstoneTools.saveAs(this.element,"teste.jpg")
-   }
+    public saveAs() {
+        cornerstoneTools.saveAs(this.element, "teste.jpg")
+    }
 
     /**
      * Image scroll methods

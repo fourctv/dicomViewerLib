@@ -21,6 +21,7 @@ export class CornerstoneDirective implements OnInit {
   public currentImage:any;
   public patientName = ''; // current image Patient name, do display on the overlay
   public hospital = ''; // current image Institution name, to display on the overlay
+  public instanceNumber = ''; // current image Instance #, to display on the overlay
 
   public get windowingValue():string {
     var viewport = cornerstone.getViewport(this.element);
@@ -129,6 +130,7 @@ export class CornerstoneDirective implements OnInit {
     // get image info to display in overlays
     this.patientName = image.data.string('x00100010').replace(/\^/g,'');
     this.hospital = image.data.string('x00080080');
+    this.instanceNumber = image.data.intString('x00200011') + '/' + image.data.intString('x00200013');
 
     // Activate mouse clicks, mouse wheel and touch
     cornerstoneTools.mouseInput.enable(this.element);

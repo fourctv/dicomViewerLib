@@ -1,16 +1,19 @@
 <div style="display: flex; width:100%; height: 100%;">
-    <div class="thumbnailSelector">
+    <div class="thumbnailSelector" *ngIf="seriesList.length > 1">
         <div class="thumbnails list-group" style="height: 100%;">
-            <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item" oncontextmenu="return false" unselectable="on" onselectstart="return false;"
-                onmousedown="return false;" (click)="showSeries(i)">
-                <div thumbnail [imageData]="series.imageList[0]" class="csthumbnail" oncontextmenu="return false" unselectable="on" onselectstart="return false;"
-                    onmousedown="return false;">
+            <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item"
+                oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;"
+                (click)="showSeries(i)">
+                <div thumbnail [imageData]="series.imageList[0]" class="csthumbnail" oncontextmenu="return false"
+                    unselectable="on" onselectstart="return false;" onmousedown="return false;">
                 </div>
-                <div class="text-center small">{{series.seriesDescription}}</div>
+                <div class="text-center small" style="color:white;">{{series.seriesDescription}}</div>
+                <div id="mrtopright" style="position: absolute;top:3px; right:3px">
+                    <div id="imageCount" style="color:red; font-size: 10pt">{{series.imageCount}}</div>
+                </div>
             </a>
             <div class="version">
-                <h6 style="color:white;"><small>0.1.6</small></h6>
-
+                <h6 style="color:white;"><small>0.1.8</small></h6>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
         <div>
             <div class="btn-group">
                 <div class="btn-group" *ngIf="enableViewerTools">
-                    
+
                     <!-- WW/WL -->
                     <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Windowing"><span class="fa fa-sun"></span></button>
@@ -60,11 +63,12 @@
                 <div class="btn-group">
                     <!-- Play clip -->
                     <button type="button" (click)="playClip()" style="border-left: 1px dotted white;" class="btn btn-sm btn-default"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span
+                            class="fa fa-play"></span></button>
                     <!-- Stop clip -->
                     <button type="button" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
-    
+
                     <!-- Layout -->
                     <!--                 <button type="button" style="border-left: 1px dotted white;" [matMenuTriggerFor]="menu" class="btn btn-sm btn-default" data-container='body' data-toggle="dropdown" aria-expanded="false" data-placement="top" title="Layout"><span class="fa fa-th-large"></span></button>
                   <mat-menu #menu="matMenu">
@@ -74,9 +78,11 @@
                           <a mat-menu-item class="dropdown-item" >2x2</a>
                     
                   </mat-menu> -->
-                 
-                    <!-- Download -->               
-                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Download">
+
+                    <!-- Download -->
+                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Download">
                         <span class="fa fa-download"></span>
                     </a>
 
@@ -86,14 +92,17 @@
                         title="Next Image"><span class="fa fa-backward"></span></button>
                     <!-- Próxima Imagem -->
                     <button type="button" (click)="nextImage()" [ngStyle]="hideNextImage" class="btn btn-sm btn-default"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Previous Image"><span class="fa fa-forward"></span></button>
-                 
-                    <!-- Load Next Batch -->               
-                    <a *ngIf="moreImagestoLoad != ''" (click)="loadMoreImages()"  style="border-left: 1px dotted white;color: white;" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Load more images...">
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Previous Image"><span
+                            class="fa fa-forward"></span></button>
+
+                    <!-- Load Next Batch -->
+                    <a *ngIf="moreImagestoLoad != ''" (click)="loadMoreImages()" style="border-left: 1px dotted white;color: white;"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Load more images...">
                         {{moreImagestoLoad}}
                     </a>
 
-                    <!-- Progress Spinner -->               
+                    <!-- Progress Spinner -->
                     <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
                         <mat-spinner style="display: inline-block;" diameter="30" strokeWidth="5" color="warn"></mat-spinner>
                     </div>
@@ -115,7 +124,12 @@
                 {{viewPort.hospital}}
             </div>
             <div id="mrbottomleft" style="position: absolute;bottom:3px; left:3px">
-                WW/WC: {{viewPort.windowingValue}}
+                <div>
+                    {{viewPort.instanceNumber}}
+                </div>
+                <div>
+                    WW/WC: {{viewPort.windowingValue}}
+                </div>
             </div>
             <div id="mrbottomcenter" style="position: absolute;bottom:3px; width: 100%;text-align: center; color:red">
                 SOMENTE PARA VISUALIZAÇÃO, NÃO PODE SER USADO PARA DIAGNÓSTICO.
