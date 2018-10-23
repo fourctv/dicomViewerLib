@@ -30,7 +30,7 @@ export class DICOMViewerComponent implements AfterViewInit {
     public get moreImagestoLoad(): string {
         if (this.loadedImages.length < this.imageIdList.length && !this.loadingImages) { // are there any more images to load?
             const imagesToLoad = (this.maxImagesToLoad <= 0) ? (this.imageIdList.length - this.loadedImages.length) : Math.min(this.maxImagesToLoad, this.imageIdList.length - this.loadedImages.length);
-            return 'load next ' + imagesToLoad + ' images';
+            return imagesToLoad.toString();
         } else return '';
     }
 

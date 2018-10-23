@@ -13,7 +13,7 @@
                 </div>
             </a>
             <div class="version">
-                <h6 style="color:white;"><small>0.1.8</small></h6>
+                <h6 style="color:white;"><small>0.1.12</small></h6>
             </div>
         </div>
     </div>
@@ -82,24 +82,24 @@
                     <!-- Download -->
                     <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;"
                         class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
-                        title="Download">
+                        title="Download Imagens">
                         <span class="fa fa-download"></span>
                     </a>
 
                     <!-- Imagem Anterior -->
                     <button type="button" (click)="previousImage()" [ngStyle]="hidePreviousImage" style="border-left: 1px dotted white;"
                         class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
-                        title="Next Image"><span class="fa fa-backward"></span></button>
+                        title="Imagem Anterior"><span class="fa fa-backward"></span></button>
                     <!-- Próxima Imagem -->
                     <button type="button" (click)="nextImage()" [ngStyle]="hideNextImage" class="btn btn-sm btn-default"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Previous Image"><span
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Próxima Imagem"><span
                             class="fa fa-forward"></span></button>
 
                     <!-- Load Next Batch -->
                     <a *ngIf="moreImagestoLoad != ''" (click)="loadMoreImages()" style="border-left: 1px dotted white;color: white;"
                         class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
-                        title="Load more images...">
-                        {{moreImagestoLoad}}
+                        title="Carrega mais imagens...">
+                        próximas {{moreImagestoLoad}} imagens
                     </a>
 
                     <!-- Progress Spinner -->
