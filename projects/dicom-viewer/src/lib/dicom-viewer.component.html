@@ -1,5 +1,5 @@
 <div style="display: flex; width:100%; height: 100%;">
-    <div class="thumbnailSelector" *ngIf="seriesList.length > 1">
+    <div class="thumbnailSelector" *ngIf="seriesList.length > 1" style="margin-right: 5px;">
         <div class="thumbnails list-group" style="height: 100%;">
             <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item"
                 oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;"
@@ -19,7 +19,7 @@
     </div>
 
     <!--container where image will be loaded-->
-    <div style="margin-left: 5px; overflow: hidden; width: 100%; height: 100%; background-color: #424242;">
+    <div style="overflow: hidden; width: 100%; height: 100%; background-color: #424242;">
 
         <!-- Toolbar -->
         <div>
@@ -76,7 +76,7 @@
                           <a mat-menu-item class="dropdown-item" >2x1</a>
                           <a mat-menu-item class="dropdown-item" >1x2</a>
                           <a mat-menu-item class="dropdown-item" >2x2</a>
-                    
+
                   </mat-menu> -->
 
                     <!-- Download -->

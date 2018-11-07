@@ -52,7 +52,7 @@ export class DICOMViewerComponent implements AfterViewInit {
 
     /**
      * Load dicom images for display
-     * 
+     *
      * @param imageIdList list of imageIds to load and display
      */
     loadStudyImages(imageIdList: Array<any>) {
@@ -92,7 +92,7 @@ export class DICOMViewerComponent implements AfterViewInit {
     }
 
     /**
-     * 
+     *
      * @param imageData the dicom image data
      * @param imageIndex the image index loades
      * @param maxImages max images to load
@@ -124,9 +124,9 @@ export class DICOMViewerComponent implements AfterViewInit {
                 return 0;
             })
         }
-        
+
         this.loadedImages.push(imageData); // save to images loaded
-        
+
         if ((imageIndex + 1) >= maxImages) { // did we finish loading images?
             this.loadingImages = false; // deactivate progress indicator
         }
@@ -137,7 +137,7 @@ export class DICOMViewerComponent implements AfterViewInit {
             //this.viewPort.addImageData(imageData);
             this.showSeries(this.currentSeriesIndex)
         }
-        
+
     }
 
     public showSeries(index) {
@@ -326,4 +326,12 @@ export class DICOMViewerComponent implements AfterViewInit {
         }
     }
 
+    public clearImage() {
+      this.viewPort.resetImageCache();
+      this.seriesList = []; // list of series on the images being displayed
+      this.currentSeriesIndex = 0;
+      this.currentSeries = {};
+      this.imageCount = 0; // total image count being viewed
+
+    }
 }

@@ -25,13 +25,13 @@ export class CornerstoneDirective implements OnInit {
 
   public get windowingValue():string {
     var viewport = cornerstone.getViewport(this.element);
-    if (viewport) {return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);}
+    if (this.currentImage && viewport) {return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);}
     else return '';
   }
 
   public get zoomValue():string {
     var viewport = cornerstone.getViewport(this.element);
-    if (viewport) {return viewport.scale.toFixed(2);}
+    if (this.currentImage && viewport) {return viewport.scale.toFixed(2);}
     else return '';
   }
 
@@ -50,22 +50,22 @@ export class CornerstoneDirective implements OnInit {
     if (this.imageList.length > 0) {
       const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
       // console.log(event);
-  
-  
+
+
       if (delta > 0) {
         this.currentIndex++;
         if (this.currentIndex >= this.imageList.length) {
           this.currentIndex = this.imageList.length - 1;
         }
       } else {
-  
+
         this.currentIndex--;
         if (this.currentIndex < 0) {
           this.currentIndex = 0;
         }
-  
+
       }
-  
+
       this.displayImage(this.imageList[this.currentIndex]);
     }
 
@@ -82,30 +82,40 @@ export class CornerstoneDirective implements OnInit {
   }
 
   public resetImageCache() {
-    //cornerstone.imageCache.purgeCache();
-    //cornerstone.reset(this.element);
+    // Reset the element with Cornerstone
+    cornerstone.disable(this.element);
+    cornerstone.enable(this.element);
+
     this.imageList = [];
     this.imageIdList = [];
     this.currentImage = null;
+    this.currentIndex = 0;
+    this.patientName = '';
+    this.hospital = '';
+    this.instanceNumber = '';
   }
 
   public previousImage() {
+    if (this.imageList.length > 0) {
       this.currentIndex--;
       if (this.currentIndex < 0) {
         this.currentIndex = 0;
       }
     this.displayImage(this.imageList[this.currentIndex]);
+    }
 
   }
 
   public nextImage() {
+    if (this.imageList.length > 0) {
       this.currentIndex++;
       if (this.currentIndex >= this.imageList.length) {
         this.currentIndex = this.imageList.length - 1;
       }
      this.displayImage(this.imageList[this.currentIndex]);
+    }
  }
-  
+
   public addImageData(imageData: any) {
     //if (!this.imageList.filter(img => img.imageId === imageData.imageId).length) {
       this.imageList.push(imageData);
@@ -115,7 +125,7 @@ export class CornerstoneDirective implements OnInit {
         this.displayImage(imageData);
       }
     //}
-    
+
     cornerstone.resize(this.element, true);
   }
 
