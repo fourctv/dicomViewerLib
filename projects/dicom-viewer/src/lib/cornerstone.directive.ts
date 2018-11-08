@@ -82,6 +82,7 @@ export class CornerstoneDirective implements OnInit {
   }
 
   public resetImageCache() {
+    this.element = this.elementRef.nativeElement;
     // Reset the element with Cornerstone
     cornerstone.disable(this.element);
     cornerstone.enable(this.element);
@@ -117,6 +118,7 @@ export class CornerstoneDirective implements OnInit {
  }
 
   public addImageData(imageData: any) {
+    this.element = this.elementRef.nativeElement;
     //if (!this.imageList.filter(img => img.imageId === imageData.imageId).length) {
       this.imageList.push(imageData);
       this.imageIdList.push(imageData.imageId);
@@ -130,6 +132,7 @@ export class CornerstoneDirective implements OnInit {
   }
 
   public displayImage(image) {
+    this.element = this.elementRef.nativeElement;
     const viewport = cornerstone.getDefaultViewportForImage(this.element, image);
     cornerstone.displayImage(this.element, image, viewport);
     this.currentImage = image;

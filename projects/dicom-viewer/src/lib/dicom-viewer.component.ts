@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { CornerstoneDirective } from './cornerstone.directive';
 
 
@@ -11,7 +11,7 @@ declare const cornerstoneTools;
     templateUrl: './dicom-viewer.component.html',
     styleUrls: ['./dicom-viewer.component.css']
 })
-export class DICOMViewerComponent implements AfterViewInit {
+export class DICOMViewerComponent implements OnInit {
 
     @Input() public enableViewerTools = false; // enable viewer tools
     @Input() public downloadImagesURL = '' // download images URL
@@ -46,7 +46,7 @@ export class DICOMViewerComponent implements AfterViewInit {
 
     constructor() { }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.element = this.viewPort.element;
     }
 
@@ -56,6 +56,7 @@ export class DICOMViewerComponent implements AfterViewInit {
      * @param imageIdList list of imageIds to load and display
      */
     loadStudyImages(imageIdList: Array<any>) {
+        this.element = this.viewPort.element;
         this.imageIdList = imageIdList;
         this.viewPort.resetImageCache(); // clean up image cache
         this.seriesList = []; // start a new series list
@@ -78,6 +79,7 @@ export class DICOMViewerComponent implements AfterViewInit {
      * Load the next batch of images
      */
     public loadMoreImages() {
+        this.element = this.viewPort.element;
         //
         // loop thru all imageIds, load and cache them for exhibition (up the the maximum limit defined)
         //
