@@ -43,6 +43,7 @@ export class DICOMViewerComponent implements OnInit {
     private loadedImages = [];
     private imageIdList = [];
     private element: any;
+    private targetImageCount = 0;
 
     constructor() { }
 
@@ -68,9 +69,10 @@ export class DICOMViewerComponent implements OnInit {
         //
         const maxImages = (this.maxImagesToLoad <= 0) ? imageIdList.length : Math.min(this.maxImagesToLoad, imageIdList.length);
         this.loadingImages = true; // activate progress indicator
+        this.targetImageCount = maxImages;
         for (let index = 0; index < maxImages; index++) {
             const imageId = imageIdList[index];
-            cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData, index, maxImages) });
+            cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData) });
         }
 
     }
@@ -85,10 +87,13 @@ export class DICOMViewerComponent implements OnInit {
         //
         const maxImages = (this.maxImagesToLoad <= 0) ? (this.imageIdList.length - this.loadedImages.length) : Math.min(this.maxImagesToLoad, this.imageIdList.length - this.loadedImages.length);
         this.loadingImages = true; // activate progress indicator
+        this.targetImageCount += maxImages;
         let nextImageIndex = this.loadedImages.length;
         for (let index = 0; index < maxImages; index++) {
             const imageId = this.imageIdList[nextImageIndex++];
-            cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData, index, maxImages) });
+            cornerstone.loadAndCacheImage(imageId)
+              .then(imageData => { this.imageLoaded(imageData) })
+              .catch(err => {this.targetImageCount--;});
         }
 
     }
@@ -96,10 +101,8 @@ export class DICOMViewerComponent implements OnInit {
     /**
      *
      * @param imageData the dicom image data
-     * @param imageIndex the image index loades
-     * @param maxImages max images to load
      */
-    private imageLoaded(imageData, imageIndex, maxImages) {
+    private imageLoaded(imageData) {
         //console.log(imageData.imageId)
         // build list of series in all loadded images
         const series = {
@@ -134,7 +137,7 @@ export class DICOMViewerComponent implements OnInit {
 
         this.loadedImages.push(imageData); // save to images loaded
 
-        if ((imageIndex + 1) >= maxImages) { // did we finish loading images?
+        if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
             this.loadingImages = false; // deactivate progress indicator
         }
 
@@ -148,17 +151,17 @@ export class DICOMViewerComponent implements OnInit {
     }
 
     public showSeries(index) {
-        this.resetAllTools();
+//        this.resetAllTools();
         this.currentSeriesIndex = index;
         this.currentSeries = this.seriesList[index];
         this.imageCount = this.currentSeries.imageCount; // get total image count
 //        this.viewPort.resetImageCache(); // clean up image cache
-        this.loadingImages = true; // activate progress indicator
+//        this.loadingImages = true; // activate progress indicator
         for (let i = 0; i < this.currentSeries.imageList.length; i++) {
             const imageData = this.currentSeries.imageList[i];
             this.viewPort.addImageData(imageData);
         }
-        this.loadingImages = false; // de-activate progress indicator
+//        this.loadingImages = false; // de-activate progress indicator
     }
 
     public saveAs() {
