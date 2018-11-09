@@ -116,6 +116,11 @@ export class DICOMViewerComponent implements OnInit {
         if (seriesIndex < 0) {
             seriesIndex = this.seriesList.length;
             this.seriesList.push(series);
+            this.seriesList.sort((a,b) => {
+              if (a.seriesNumber > b.seriesNumber) return 1;
+              if (a.seriesNumber < b.seriesNumber) return -1;
+              return 0;
+          })
         } else {
             let seriesItem = this.seriesList[seriesIndex];
             seriesItem.imageCount++;
@@ -147,7 +152,7 @@ export class DICOMViewerComponent implements OnInit {
         this.currentSeriesIndex = index;
         this.currentSeries = this.seriesList[index];
         this.imageCount = this.currentSeries.imageCount; // get total image count
-        this.viewPort.resetImageCache(); // clean up image cache
+//        this.viewPort.resetImageCache(); // clean up image cache
         this.loadingImages = true; // activate progress indicator
         for (let i = 0; i < this.currentSeries.imageList.length; i++) {
             const imageData = this.currentSeries.imageList[i];
