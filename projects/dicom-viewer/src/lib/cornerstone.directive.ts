@@ -24,23 +24,31 @@ export class CornerstoneDirective implements OnInit {
   public instanceNumber = ''; // current image Instance #, to display on the overlay
 
   public get windowingValue():string {
-    var viewport = cornerstone.getViewport(this.element);
-    if (this.currentImage && viewport) {return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);}
-    else return '';
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) {return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);}
+    }
+    return '';
   }
 
   public get zoomValue():string {
-    var viewport = cornerstone.getViewport(this.element);
-    if (this.currentImage && viewport) {return viewport.scale.toFixed(2);}
-    else return '';
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) {return viewport.scale.toFixed(2);}
+    }
+    return '';
   }
+
+  private isCornerstoneEnabled = false;
 
   constructor(private elementRef: ElementRef) {
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    cornerstone.resize(this.element, true);
+    if (this.isCornerstoneEnabled)  {
+      cornerstone.resize(this.element, true);
+    }
   }
 
   //@HostListener('mousewheel', ['$event'])
@@ -85,18 +93,18 @@ export class CornerstoneDirective implements OnInit {
   // reset the viewer, so only this current element is enabled
   //
   public resetViewer() {
+    this.disableViewer();
+    cornerstone.enable(this.element);
+    this.isCornerstoneEnabled = true;
+  }
+
+  public disableViewer() {
     this.element = this.elementRef.nativeElement;
     try {
       cornerstone.disable(this.element);
       } finally {}
 
-    // Reset the element with Cornerstone
-    const list:Array<any> = cornerstone.getEnabledElements();
-    list.forEach(element => {
-      cornerstone.disable(element);
-    });
-
-    cornerstone.enable(this.element);
+    this.isCornerstoneEnabled = false;
   }
 
   public resetImageCache() {
