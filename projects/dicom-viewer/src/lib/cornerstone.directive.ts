@@ -77,16 +77,29 @@ export class CornerstoneDirective implements OnInit {
     this.element = this.elementRef.nativeElement;
 
     // Enable the element with Cornerstone
-    cornerstone.enable(this.element);
+    this.resetViewer();
 
   }
 
-  public resetImageCache() {
+  //
+  // reset the viewer, so only this current element is enabled
+  //
+  public resetViewer() {
     this.element = this.elementRef.nativeElement;
-    // Reset the element with Cornerstone
-    cornerstone.disable(this.element);
-    cornerstone.enable(this.element);
+    try {
+      cornerstone.disable(this.element);
+      } finally {}
 
+    // Reset the element with Cornerstone
+    const list:Array<any> = cornerstone.getEnabledElements();
+    list.forEach(element => {
+      cornerstone.disable(element);
+    });
+
+    cornerstone.enable(this.element);
+  }
+
+  public resetImageCache() {
     this.imageList = [];
     this.imageIdList = [];
     this.currentImage = null;

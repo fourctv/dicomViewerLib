@@ -59,6 +59,7 @@ export class DICOMViewerComponent implements OnInit {
     loadStudyImages(imageIdList: Array<any>) {
         this.element = this.viewPort.element;
         this.imageIdList = imageIdList;
+        this.viewPort.resetViewer();
         this.viewPort.resetImageCache(); // clean up image cache
         this.seriesList = []; // start a new series list
         this.currentSeriesIndex = 0; // always display first series
@@ -155,7 +156,7 @@ export class DICOMViewerComponent implements OnInit {
         this.currentSeriesIndex = index;
         this.currentSeries = this.seriesList[index];
         this.imageCount = this.currentSeries.imageCount; // get total image count
-//        this.viewPort.resetImageCache(); // clean up image cache
+        this.viewPort.resetImageCache(); // clean up image cache
 //        this.loadingImages = true; // activate progress indicator
         for (let i = 0; i < this.currentSeries.imageList.length; i++) {
             const imageData = this.currentSeries.imageList[i];
@@ -337,6 +338,7 @@ export class DICOMViewerComponent implements OnInit {
     }
 
     public clearImage() {
+      this.viewPort.resetViewer();
       this.viewPort.resetImageCache();
       this.seriesList = []; // list of series on the images being displayed
       this.currentSeriesIndex = 0;
