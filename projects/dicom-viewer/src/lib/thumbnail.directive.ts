@@ -12,7 +12,7 @@ export class ThumbnailDirective implements OnInit {
 
   @Input() public imageData: any;
 
-  private element: any;
+  public element: any;
 
   constructor(private elementRef: ElementRef) {
   }
