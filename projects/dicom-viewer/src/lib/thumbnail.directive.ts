@@ -20,9 +20,14 @@ export class ThumbnailDirective implements OnInit {
   ngOnInit() {
  // Retrieve the DOM element itself
     this.element = this.elementRef.nativeElement;
-   
+
     // Enable the element with Cornerstone
     cornerstone.enable(this.element);
+    this.setImageData(this.imageData);
+  }
+
+  public setImageData(image) {
+    this.imageData = image;
     if (this.imageData && this.element) {
       const viewport = cornerstone.getDefaultViewportForImage(this.element, this.imageData);
       cornerstone.displayImage(this.element, this.imageData, viewport);
@@ -30,7 +35,6 @@ export class ThumbnailDirective implements OnInit {
       cornerstone.fitToWindow(this.element);
       cornerstone.resize(this.element, true);
     }
+
   }
-
-
 }
