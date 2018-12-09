@@ -1,5 +1,6 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, ViewChildren } from '@angular/core';
 import { CornerstoneDirective } from './cornerstone.directive';
+import { ThumbnailDirective } from './thumbnail.directive';
 
 
 
@@ -39,6 +40,7 @@ export class DICOMViewerComponent implements OnInit {
     public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
 
     @ViewChild(CornerstoneDirective) viewPort: CornerstoneDirective; // the main cornertone view port
+    @ViewChildren(ThumbnailDirective) thumbnails:Array<ThumbnailDirective>;
 
     private loadedImages = [];
     private imageIdList = [];
@@ -138,15 +140,15 @@ export class DICOMViewerComponent implements OnInit {
 
         this.loadedImages.push(imageData); // save to images loaded
 
-        if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
-            this.loadingImages = false; // deactivate progress indicator
-        }
-
         if (seriesIndex === this.currentSeriesIndex) {
             //this.currentSeries = this.seriesList[seriesIndex];
             //this.imageCount = this.currentSeries.imageCount; // get total image count
             //this.viewPort.addImageData(imageData);
             this.showSeries(this.currentSeriesIndex)
+        }
+
+        if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
+            this.loadingImages = false; // deactivate progress indicator
         }
 
     }

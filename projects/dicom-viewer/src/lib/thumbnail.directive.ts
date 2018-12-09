@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, Input } from '@angular/core';
+import { Directive, ElementRef, OnInit, Input, AfterViewChecked } from '@angular/core';
 
 
 declare const cornerstone;
@@ -8,7 +8,7 @@ declare const cornerstone;
   selector: '[thumbnail]',
 })
 
-export class ThumbnailDirective implements OnInit {
+export class ThumbnailDirective implements OnInit, AfterViewChecked {
 
   @Input() public imageData: any;
 
@@ -23,6 +23,14 @@ export class ThumbnailDirective implements OnInit {
 
     // Enable the element with Cornerstone
     cornerstone.enable(this.element);
+    this.setImageData(this.imageData);
+  }
+
+  ngAfterViewChecked() {
+    this.refresh();
+  }
+
+  public refresh() {
     this.setImageData(this.imageData);
   }
 

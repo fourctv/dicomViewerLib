@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnInit, AfterViewChecked } from '@angular/core';
 
 
 declare const cornerstone;
@@ -11,7 +11,7 @@ declare const cornerstoneTools;
   selector: '[cornerstone]',
 })
 
-export class CornerstoneDirective implements OnInit {
+export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   public element: any;
 
@@ -87,6 +87,10 @@ export class CornerstoneDirective implements OnInit {
     // Enable the element with Cornerstone
     this.resetViewer();
 
+  }
+
+  ngAfterViewChecked() {
+    if (this.currentImage) cornerstone.resize(this.element, true);
   }
 
   //
