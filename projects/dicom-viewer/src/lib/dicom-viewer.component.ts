@@ -39,7 +39,7 @@ export class DICOMViewerComponent implements OnInit {
     public loadingImages = false;
     public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
 
-    @ViewChild(CornerstoneDirective) viewPort: CornerstoneDirective; // the main cornertone view port
+    @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornertone view port
     @ViewChildren(ThumbnailDirective) thumbnails:Array<ThumbnailDirective>;
 
     private loadedImages = [];

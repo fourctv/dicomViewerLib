@@ -11,7 +11,7 @@ declare const cornerstoneWADOImageLoader;
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild(DICOMViewerComponent) viewPort: DICOMViewerComponent;
+  @ViewChild(DICOMViewerComponent, { static: true }) viewPort: DICOMViewerComponent;
 
   ngOnInit() {
     cornerstoneWADOImageLoader.external.cornerstone = cornerstone; // inicializa WADO Image loader
