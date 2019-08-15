@@ -6,7 +6,7 @@
 [![devDependency Status](https://david-dm.org/fourctv/dicomViewerLib/dev-status.svg)](https://david-dm.org/fourctv/dicomViewerLib#info=devDependencies)
 [![npm version](https://badge.fury.io/js/dicomViewerLib.svg)](https://badge.fury.io/js/ng-dicomviewer)
 
-This is an Angular 6+ DICOM Web Viewer Component, based on [CornerstoneJS](https://github.com/cornerstonejs) Project.
+This is an Angular 8+ DICOM Web Viewer Component, based on [CornerstoneJS](https://github.com/cornerstonejs) Project.
 
 It includes a demo app that can be tried [here](https://fourctv.github.io/dicomViewerDemo/). Demo app source is included in the project.
 
