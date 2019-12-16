@@ -21,7 +21,7 @@ npm install ng-dicomviewer --save
 
 This component depends on `cornerstonejs`, so you need to also install `cornerstone` and `cornerstoneTools` modules into your project:
 ```
-npm install cornerstone-core cornerstone-math dicom-parser cornerstone-tools --save
+npm install cornerstone-core cornerstone-math dicom-parser cornerstone-tools@2.5.0 --save
 ```
 
 ## Usage
