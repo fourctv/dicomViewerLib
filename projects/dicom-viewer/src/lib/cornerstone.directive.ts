@@ -166,7 +166,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstone.resize(this.element, true);
 
     // get image info to display in overlays
-    this.patientName = image.data.string('x00100010').replace(/\^/g,'');
+    if (image.data.string('x00100010')) this.patientName = image.data.string('x00100010').replace(/\^/g,'');
     this.hospital = image.data.string('x00080080');
     this.instanceNumber = image.data.intString('x00200011') + '/' + image.data.intString('x00200013');
 
