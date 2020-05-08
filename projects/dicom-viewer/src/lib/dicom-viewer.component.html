@@ -32,12 +32,6 @@
                     <!-- Invert -->
                     <button type="button" (click)="invertImage()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
-                    <!-- Zoom -->
-                    <button type="  button" (click)="enableZoom()" class="btn btn-sm btn-default" data-container='body'
-                        data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
-                    <!-- Pan -->
-                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body'
-                        data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Stack scroll -->
                     <button type="button" (click)="enableScroll()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Scroll"><span class="fa fa-bars"></span></button>
@@ -61,6 +55,12 @@
                         data-toggle="tooltip" data-placement="bottom" title="Reset Image"><span class="fa fa-window-restore"></span></button>
                 </div>
                 <div class="btn-group">
+                    <!-- Zoom -->
+                    <button type="  button" (click)="enableZoom()" class="btn btn-sm btn-default" data-container='body'
+                      data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                    <!-- Pan -->
+                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Play clip -->
                     <button type="button" (click)="playClip()" style="border-left: 1px dotted white;" class="btn btn-sm btn-default"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span
