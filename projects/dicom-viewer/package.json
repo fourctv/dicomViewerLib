@@ -1,6 +1,6 @@
 {
   "name": "ng-dicomviewer",
-  "version": "0.1.34",
+  "version": "0.1.35",
   "description": "Angular DICOM Viewer Component based on Cornerstore",
   "repository": {
     "type": "git",
@@ -13,21 +13,21 @@
   },
   "homepage": "https://github.com/fourctv/dicomViewerLib#readme",
   "peerDependencies": {
-    "@angular/cdk": ">=7.0.0",
-    "@angular/common": ">=4.3.0 || >7.0.0",
-    "@angular/compiler": ">=4.3.0 || >7.0.0",
-    "@angular/core": ">=4.3.0 || >7.0.0",
-    "@angular/forms": ">=4.3.0 || >7.0.0",
-    "@angular/material": ">=7.0.0",
-    "@angular/platform-browser": ">=4.3.0 || >7.0.0",
-    "@angular/platform-browser-dynamic": ">=4.3.0 || >7.0.0",
+    "@angular/cdk": ">=9.2.0",
+    "@angular/common": ">=9.1.0",
+    "@angular/compiler": ">=9.1.0",
+    "@angular/core": ">=9.1.0",
+    "@angular/forms": ">=9.1.0",
+    "@angular/material": ">=9.1.0",
+    "@angular/platform-browser": ">=9.1.0",
+    "@angular/platform-browser-dynamic": ">=9.1.0",
     "cornerstone-core": ">=2.3.0",
     "cornerstone-math": ">=0.1.8",
-    "cornerstone-tools": ">=2.5.0",
-    "dicom-parser": ">=1.8.1",
-    "jquery": ">=3.2.1",
-    "rxjs": ">=7.0.0",
-    "zone.js": ">=0.8.5"
+    "cornerstone-tools": ">=2.6.0",
+    "dicom-parser": ">=1.8.5",
+    "jquery": ">=3.5.1",
+    "rxjs": ">=6.5.5",
+    "zone.js": ">=0.10.2"
 
   }
 }

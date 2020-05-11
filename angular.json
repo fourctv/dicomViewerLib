@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/dicomViewerDemo",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,11 +31,18 @@
               "node_modules/cornerstone-math/dist/cornerstoneMath.js",
               "node_modules/cornerstone-tools/dist/cornerstoneTools.js",
               "node_modules/dicom-parser/dist/dicomParser.js",
+              "node_modules/hammerjs/hammer.js",
               "src/assets/cornerstone/lib/cornerstoneWADOImageLoader.js"
             ]
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -141,7 +149,9 @@
             "project": "projects/dicom-viewer/ng-package.json"
           },
           "configurations": {
-            "production": {}
+            "production": {
+              "tsConfig": "projects/dicom-viewer/tsconfig.lib.prod.json"
+}
           }
 
         },
