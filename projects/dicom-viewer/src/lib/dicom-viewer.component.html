@@ -62,11 +62,11 @@
                     <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
                       data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Play clip -->
-                    <button type="button" (click)="playClip()" style="border-left: 1px dotted white;" class="btn btn-sm btn-default"
+                    <button type="button" *ngIf="enablePlayTools" (click)="playClip()" style="border-left: 1px dotted white;" class="btn btn-sm btn-default"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span
                             class="fa fa-play"></span></button>
                     <!-- Stop clip -->
-                    <button type="button" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
+                    <button type="button" *ngIf="enablePlayTools" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
 
                     <!-- Layout -->

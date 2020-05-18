@@ -15,6 +15,7 @@ declare const cornerstoneTools;
 export class DICOMViewerComponent implements OnInit {
 
   @Input() public enableViewerTools = false; // enable viewer tools
+  @Input() public enablePlayTools = false; // enable Play Clip tools
   @Input() public downloadImagesURL = '' // download images URL
   @Input() public maxImagesToLoad = 20; // limit for the automatic loading of study images
 
@@ -215,8 +216,9 @@ export class DICOMViewerComponent implements OnInit {
       this.resetAllTools();
       // cornerstoneTools.zoom.activate(this.element, 5); // 5 is right mouse button and left mouse button
       // cornerstoneTools.zoomTouchDrag.activate(this.element);
-      cornerstoneTools.setToolActiveForElement(this.element, 'Zoom', { mouseButtonMask: 1 }, ['Mouse']);
+      cornerstoneTools.setToolActiveForElement(this.element, 'Zoom', { mouseButtonMask: 1 }, ['Mouse']); // zoom left mouse
       // cornerstoneTools.setToolActiveForElement(this.element, 'ZoomTouchPinch', { }, ['Mouse']);
+      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
 
     }
   }
@@ -295,7 +297,7 @@ export class DICOMViewerComponent implements OnInit {
       if (stackState) {
         frameRate = stackState.data[0].frameRate;
         // Play at a default 10 FPS if the framerate is not specified
-        if (frameRate === undefined) {
+        if (frameRate === undefined || frameRate === null || frameRate === 0) {
           frameRate = 10;
         }
       }
