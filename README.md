@@ -72,7 +72,8 @@ The component includes some input properties and a method to load/show dicom ima
 
 ### Input properties
 
-- enableViewerTools: a boolean `true|false` to indicate of viewer tools should be enabled or not. Tools include Langth, Angle, Elliptical ROI, etc...
+- enableViewerTools: a boolean `true|false` to indicate if Viewer tools should be enabled or not. Tools include Langth, Angle, Elliptical ROI, etc...
+- enablePlayTools: a boolean `true|false` to indicate if Play Clip tools should be enabled or not.
 - maxImagesToLoad: maximum number of images to load for display (default: 20). If more images are set for display, they will be loaded `maxImagesToLoad` at a time. If value is set to `0` or `-1`, no image loading limit will apply.
 - downloadImagesURL: optional property, if set a **Download Images** button will be enabled. The URI value set will be used to download all images as a `.zip` file.
 
