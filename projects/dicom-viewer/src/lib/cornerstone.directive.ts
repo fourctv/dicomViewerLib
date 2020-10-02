@@ -4,7 +4,7 @@ import * as Hammer from 'hammerjs';
 
 declare const cornerstone;
 declare const cornerstoneTools;
-declare const cornerstoneMath;;
+declare const cornerstoneMath;
 
 
 
