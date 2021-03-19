@@ -1,0 +1,55 @@
+{
+  "name": "ng-dicomviewer",
+  "version": "0.1.38",
+  "description": "Angular DICOM Viewer Component based on Cornerstore",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fourctv/dicomViewerLib"
+  },
+  "author": "Julio Carneiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fourctv/dicomViewerLib/issues"
+  },
+  "homepage": "https://github.com/fourctv/dicomViewerLib#readme",
+  "peerDependencies": {
+    "@angular/cdk": ">=9.2.0",
+    "@angular/common": ">=9.1.0",
+    "@angular/compiler": ">=9.1.0",
+    "@angular/core": ">=9.1.0",
+    "@angular/forms": ">=9.1.0",
+    "@angular/material": ">=9.1.0",
+    "@angular/platform-browser": ">=9.1.0",
+    "@angular/platform-browser-dynamic": ">=9.1.0",
+    "cornerstone-core": ">=2.3.0",
+    "cornerstone-math": ">=0.1.8",
+    "cornerstone-tools": ">=2.6.0",
+    "dicom-parser": ">=1.8.5",
+    "jquery": ">=3.5.1",
+    "rxjs": ">=6.5.5",
+    "zone.js": ">=0.10.2"
+  },
+  "main": "bundles/ng-dicomviewer.umd.js",
+  "module_ivy_ngcc": "__ivy_ngcc__/fesm2015/ng-dicomviewer.js",
+  "module": "fesm2015/ng-dicomviewer.js",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/ng-dicomviewer.js",
+  "es2015": "fesm2015/ng-dicomviewer.js",
+  "esm2015": "esm2015/ng-dicomviewer.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/ng-dicomviewer.js",
+  "fesm2015": "fesm2015/ng-dicomviewer.js",
+  "typings": "ng-dicomviewer.d.ts",
+  "metadata": "ng-dicomviewer.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": ">=2.0.0"
+  },
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "10.0.6",
+    "fesm2015": "10.0.6",
+    "module": "10.0.6",
+    "typings": "10.0.6"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
+  }
+}
