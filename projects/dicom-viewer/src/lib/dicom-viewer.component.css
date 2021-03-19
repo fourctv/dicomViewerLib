@@ -49,5 +49,8 @@ a.list-group-item {
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
     background-color: #424242;
     border-color: #4e4e4e;
-    background-image: linear-gradient(red, red, red);
+    background-image: linear-gradient(rgb(211, 34, 81), rgb(211, 34, 81), rgb(211, 34, 81));
+}
+a.list-group-item.active {
+    color: blue;
 }
