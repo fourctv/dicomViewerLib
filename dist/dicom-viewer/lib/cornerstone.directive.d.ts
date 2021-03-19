@@ -1,5 +1,4 @@
 import { ElementRef, OnInit, AfterViewChecked } from '@angular/core';
-import * as ɵngcc0 from '@angular/core';
 export declare class CornerstoneDirective implements OnInit, AfterViewChecked {
     private elementRef;
     element: any;
@@ -39,8 +38,4 @@ export declare class CornerstoneDirective implements OnInit, AfterViewChecked {
     addImageData(imageData: any): void;
     displayImage(image: any): void;
     resetAllTools(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CornerstoneDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<CornerstoneDirective, "[cornerstone]", never, {}, {}, never>;
 }
-
-//# sourceMappingURL=cornerstone.directive.d.ts.map
