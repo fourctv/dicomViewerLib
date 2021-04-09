@@ -1,0 +1,1 @@
+{"version":3,"file":"dicom-viewer.module.d.ts","sources":["dicom-viewer.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;;AACA","sourcesContent":["export declare class DicomViewerModule {\n}\n"]}

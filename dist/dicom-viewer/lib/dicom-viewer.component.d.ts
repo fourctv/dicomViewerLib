@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { CornerstoneDirective } from './cornerstone.directive';
 import { ThumbnailDirective } from './thumbnail.directive';
+import * as ɵngcc0 from '@angular/core';
 export declare class DICOMViewerComponent implements OnInit {
     enableViewerTools: boolean;
     enablePlayTools: boolean;
@@ -63,4 +64,8 @@ export declare class DICOMViewerComponent implements OnInit {
     invertImage(): void;
     resetImage(): void;
     clearImage(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DICOMViewerComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<DICOMViewerComponent, "dicom-viewer", never, { "enableViewerTools": "enableViewerTools"; "enablePlayTools": "enablePlayTools"; "downloadImagesURL": "downloadImagesURL"; "maxImagesToLoad": "maxImagesToLoad"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=dicom-viewer.component.d.ts.map
