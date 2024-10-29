@@ -1,6 +1,6 @@
 {
   "name": "ng-dicomviewer",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "description": "Angular DICOM Viewer Component based on Cornerstore",
   "repository": {
     "type": "git",

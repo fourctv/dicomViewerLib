@@ -123,7 +123,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstoneTools.addTool(this.StackScrollMouseWheelTool);
 
     // Enable the element with Cornerstone
-    this.resetViewer();
+    // this.resetViewer();
   }
 
   ngAfterViewChecked() {
